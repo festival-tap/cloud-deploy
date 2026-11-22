@@ -1,0 +1,29 @@
+# File: .github/dependabot.yml
+
+version: 2
+
+registries:
+  github-packages:
+    type: maven-repository
+    url: https://github.com
+    username: x-access-token
+    password: ${{secrets.GH_PACKAGES_TOKEN}}
+
+updates:
+  - package-ecosystem: "maven"
+    directory: "/"
+    registries:
+      - github-packages
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "build(deps)"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "build(ci)"
